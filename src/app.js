@@ -6,7 +6,7 @@ const zip = document.getElementById("zip");
 const submitBtn = document.getElementById("submitBtn");
 
 const getPosition = async () => {
-    const res = await fetch("http://api.open-notify.org/iss-now");
+    const res = await fetch("https://api.open-notify.org/iss-now");
     const data = await res.json();
     console.log(data.iss_position.latitude);
     console.log(data.iss_position.longitude);

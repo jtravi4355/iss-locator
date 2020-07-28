@@ -21,6 +21,23 @@
         </div>
 
         <div id="map" style="width: 800px; height: 600px;"></div>
+        <div class="next-passes">
+          <h3>
+            Enter your zip below to find out when the next time the ISS passes
+            by your city.
+          </h3>
+          <h3>Currently broken, working on a fix</h3>
+          <form>
+            <input
+              type="number"
+              name="zip"
+              id="zip"
+              placeholder="Enter your zip code..."
+            />
+            <button id="submitBtn" type="submit">Search</button>
+          </form>
+          <ul id="up-next"></ul>
+        </div>
       </main>
     </div>
 

@@ -6,7 +6,8 @@ const zip = document.getElementById("zip");
 const submitBtn = document.getElementById("submitBtn");
 
 const getPosition = async () => {
-    const res = await fetch("https://api.open-notify.org/iss-now");
+
+    const res = await fetch(`http://api.open-notify.org/iss-now.json`);
     const data = await res.json();
     console.log(data.iss_position.latitude);
     console.log(data.iss_position.longitude);
@@ -19,7 +20,6 @@ const getPosition = async () => {
 
 getPosition();
 window.setInterval(getPosition, 300000);
-
 
 const renderMap = (lon, lat) => {
     mapboxgl.accessToken =
@@ -34,43 +34,42 @@ const renderMap = (lon, lat) => {
     var marker = new mapboxgl.Marker().setLngLat([lon, lat]).addTo(map);
 };
 
+const howClose = async (lon, lat) => {
+    const proxyURL = "https://cors-anywhere.herokuapp.com/";
+    const res = await fetch(`${proxyURL}http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${lon}`,
 
-// const howClose = async (lng, lat) => {
-//   const res = await fetch(
-//     `http://api.open-notify.org/iss-pass.json?lat=${lat}&lon=${lng}`,
-//     {
-//       mode: "cors",
-//       headers: {
-//         "Access-Control-Allow-Origin": "*",
-//       },
-//     }
-//   );
-//   const data = await res.json();
-//   console.log(data.response[0].risetime);
-//   console.log(data.response[0].duration);
-//   output = "";
-//   data["response"].forEach(d => {
-//     var date = new Date(d["risetime"] * 1000);
-//     output += `<li>${date}</li>`;
-//   });
+    );
+    const data = await res.json();
+    // console.log(data.response[0].risetime);
+    // console.log(data.response[0].duration);
+    output = "";
+    data.response.forEach(d => {
+        let date = new Date(d["risetime"] * 1000).toString();
+        console.log(date);
+        let stripDate = date.replace('GMT-0400', '');
+        console.log(stripDate);
+        output += `<li>${stripDate}</li>`;
+    });
 
-//   nextPass.innerHTML = `${output}`;
-// };
+    nextPass.innerHTML = `${output}`;
+};
 
-// submitBtn.addEventListener("click", e => {
-//   e.preventDefault();
-//   console.log(zip.value);
-//   zipToPosition(zip.value);
-// });
+submitBtn.addEventListener("click", e => {
+    e.preventDefault();
+    console.log(zip.value);
+    zipToPosition(zip.value);
+});
 
 const zipToPosition = async zip => {
+    const proxyURL = "https://cors-anywhere.herokuapp.com/";
     const apiKey =
         "ZUJjUucUvcz9NwGBOrwdwazFCp7WJKGMj2Ow9IDH2NUXCPzVVsREDUnnp3L1RX20";
     const res = await fetch(
-        `https://www.zipcodeapi.com/rest/${apiKey}/info.json/17268/degrees`
+        `${proxyURL}https://www.zipcodeapi.com/rest/${apiKey}/info.json/${zip}/degrees`
     );
     const data = await res.json();
 
     console.log(data.lat, data.lng);
     howClose(data.lng, data.lat);
 };
+

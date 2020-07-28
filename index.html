@@ -3,10 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
     <title>ISS Locator</title>
   </head>
   <body>
-    <h1>ISS Locator</h1>
+    <div class="parent">
+      <header><h1>ISS Tracker</h1></header>
+      <main>
+        <div class="location-box">
+          <h2>The current location of the ISS</h2>
+          <p class="lat">Lat:</p>
+          <p class="lon">Lng:</p>
+        </div>
+
+        <div id="map" style="width: 800px; height: 600px;"></div>
+      </main>
+    </div>
 
     <script src="./dist/app.bundle.js"></script>
   </body>

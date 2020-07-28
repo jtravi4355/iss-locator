@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.parent {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+}
+
+.lat,
+.lon {
+  padding: 4px;
+  text-align: center;
+}
+
+header {
+  background: #333;
+  color: #eee;
+}
+
+header h1 {
+  padding: 16px;
+}
+
+main {
+  background: #eee;
+  display: grid;
+  place-items: center;
+}
+
+#map {
+  border-radius: 8px;
+}
+
+.next-passes {
+  text-align: center;
+}
+
+.next-passes h3 {
+  padding: 16px;
+}
+
+.next-passes #up-next {
+  list-style: none;
+  line-height: 1.5rem;
+  margin: 16px 0;
+}
+#zip,
+#submitBtn {
+  padding: 8px;
+}
+
+#zip {
+  background: #eee;
+  color: #333;
+  border: 1px solid #333;
+  border-radius: 8px;
+}
+
+#zip:focus {
+  outline: none;
+}
+
+#submitBtn {
+  background: #333;
+  color: #eee;
+  border: none;
+  border-radius: 8px;
+}
+footer {
+  background: #333;
+  color: #eee;
+}
